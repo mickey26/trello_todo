@@ -8,15 +8,17 @@ const PAGECONTAINER = styled.div``;
 function LandingPage() {
   const [addListState, setAddListState] = useState(false);
   const [l1, setL1] = useState([]);
-
+  const [tileTitle, setTileTitle] = useState('');
+  const [tileText, setTileText] = useState('');
   const [listName, setListName] = useState('');
+  const [inputState, setInputState] = useState(false);
   const componentListState = useSelector(state => state.LandingReducers.componentList);
   const dispatch = useDispatch();
 
   const handleListInsert = () => {
     let obj = {
       title: listName,
-      list: []
+      list: [],
     }
     console.log([...l1, obj], 'devsh')
     let list = [...l1, obj];
@@ -26,9 +28,8 @@ function LandingPage() {
 
   const handleAddTask = (index) => {
     let obj = {
-      title: '',
-      isActive: true,
-      text: ''
+      title: tileTitle,
+      text: tileText,
     }
     let result = l1
     result.map((item, id) => {
@@ -37,7 +38,12 @@ function LandingPage() {
       }
     })
 
-    setL1([...result])
+    console.log(result, "nitin");
+
+    setL1([...result]);
+    setTileText('');
+    setTileTitle('');
+    setInputState(!inputState);
 
   }
   return (
@@ -50,11 +56,17 @@ function LandingPage() {
             <h2>{item.title}</h2>
             {item.list.map(list => (
               <div>
-                <input type="text" />
-                <span>fsifhs</span>
+                <h2>{list.title}</h2>
+                <h2>{list.text}</h2>
               </div>
             ))}
+            {inputState ? 
+            <> 
+            <input type="text" value={tileTitle} onChange={(e) => setTileTitle(e.target.value)} />
+            <input type="text" value={tileText} onChange={(e) => setTileText(e.target.value)} />
             <span onClick={() => handleAddTask(index)} >Add</span>
+            </>
+            : <button onClick={() => setInputState(!inputState)}>+</button>}
           </div>
         ))
         }
