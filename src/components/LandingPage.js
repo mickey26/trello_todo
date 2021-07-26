@@ -62,8 +62,8 @@ function LandingPage() {
             ))}
             {inputState ? 
             <> 
-            <input type="text" value={tileTitle} onChange={(e) => setTileTitle(e.target.value)} />
-            <input type="text" value={tileText} onChange={(e) => setTileText(e.target.value)} />
+            {/* <input type="text" value={tileTitle} onChange={(e) => setTileTitle(e.target.value)} />
+            <input type="text" value={tileText} onChange={(e) => setTileText(e.target.value)} /> */}
             <span onClick={() => handleAddTask(index)} >Add</span>
             </>
             : <button onClick={() => setInputState(!inputState)}>+</button>}
